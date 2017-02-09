@@ -20,6 +20,10 @@
  * 1.多个定时器调用时，当前状态下：其中某个定时器过期后会触发没过期的某个定时器停止倒计时!
  * 2.多个定时器调用时，当前状态下：每次到0秒会有一秒钟的过期负数时间显示错误！
  * 3.增加当前调用id的对象输出,方便配合其他功能模块全局调用,例：结合上边var x用法 可在全局状态下输出x.config.id 即可得到id为abc的字符串！
+ *
+ * by 1.8
+ * 修复倒计时到期以后还在不停请求的bug
+ *
  */
  (function(win) {
 	var timer = function() {
@@ -111,13 +115,13 @@
 				}
 			}
 		},
-		test: function(d, h, m, s, ms) {			
-			s<0||s==0&&m<0?this.config.over(this.autoElement):(d = d <= 9 ? "0" + d : d,h = h <= 9 ? "0" + h : h,m = m <= 9 ? "0" + m : m,s = s <= 9 ? "0" + s : s,this.config.show(this.autoElement, d, h, m, s, ms));			
+		test: function(d, h, m, s, ms) {		
+			s<0||s==0&&m<0?this.config.over(this.autoElement):(d = d <= 9 ? "0" + d : d,h = h <= 9 ? "0" + h : h,m = m <= 9 ? "0" + m : m,s = s <= 9 ? "0" + s : s,this.config.show(this.autoElement, d, h, m, s, ms));	
 		},
 		//扩展功能
 		util: {
 			//倒计时
-			show_time: function(endtime, diff, id, sc_s, fn) {				
+			show_time: function(endtime, diff, id, sc_s, fn){			
 				var y,
 					d,
 					h,
@@ -126,6 +130,7 @@
 					ms,
 					data,
 					x,
+					flag,
 					self = this,					
 					nows = new Date().getTime(), //客户端当前时间毫秒数
 					lefttime = sc_s === 0 ? parseInt((endtime - nows) / 1000) : parseInt((endtime - nows + diff) / 1000);					
@@ -137,7 +142,11 @@
 				//ms = new String(nows).substring(new String(nows).length - 3);			
 				fn.call(self, d, h, m, s, ms);
 				//bug 多个倒计时调用时，会停止所有的倒计时运行 s<0||s==0&&m<0?clearTimeout(self.settime):self.settime=setTimeout(arguments.callee.bind(self, endtime, diff, id, sc_s, fn), 50);
-				self.settime=setTimeout(arguments.callee.bind(self, endtime, diff, id, sc_s, fn), 50);
+				//已修复
+				s<0||s==0&&m<0?flag=true:flag=false;
+				self.settime=setTimeout(arguments.callee.bind(self, endtime, diff, id, sc_s, fn), 50);	
+				if(flag==true){clearTimeout(self.settime)};			
+				
 			},
 			//跨域请求时间
 			get_js: function(get_url, fn) {
@@ -172,12 +181,7 @@
 						}
 						script.onload = script.onreadystatechange = null;
 					}
-				}
-				
-				
-
-				
-				
+				}				
 				
 				
 			}
