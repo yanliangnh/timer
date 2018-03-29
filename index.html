@@ -16,9 +16,10 @@ var x1=new Timer({
 	endtime:"2018/03/29 16:14:00",
 	show:function(id,d,h,m,s,ms,nowtime){
 		id.innerHTML=d+"/"+h+"/"+m+"/"+s+"/"+ms;
-		//到时间隐藏原来元素
+		//没到endtime时间，执行此处代码；
 	},
 	over:function(id,d,h,m,s,ms,nowtime){
+		//过了endtime时间，执行此处代码；
 		if(new Date(nowtime) > new Date('2018/03/29 17:50:00')){
 			id.innerHTML="隐藏原来元素";
 		}else{
