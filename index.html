@@ -10,26 +10,31 @@
 <div id="abc" class="ax">111</div>
 <div id="bbb">111</div>
 <script type="text/javascript">
-var x=new Timer({
+var x1=new Timer({
 	id:"abc",
 	server:1,
-	endtime:"2017/09/04 16:58:00",
-	show:function(id,d,h,m,s,ms){
-		id.innerHTML=d+"/"+h+"/"+m+"/"+s+"/"+ms;	
+	endtime:"2018/03/29 16:14:00",
+	show:function(id,d,h,m,s,ms,nowtime){
+		id.innerHTML=d+"/"+h+"/"+m+"/"+s+"/"+ms;
+		//到时间隐藏原来元素
 	},
-	over:function(id){		
-		id.innerHTML="已经过期";
+	over:function(id,d,h,m,s,ms,nowtime){
+		if(new Date(nowtime) > new Date('2018/03/29 17:50:00')){
+			id.innerHTML="隐藏原来元素";
+		}else{
+			id.innerHTML="显示原来元素";
+		}		
 	}
 });
 
-var x=new Timer({
+var x2=new Timer({
 	id:"bbb",
 	server:0,
 	endtime:"2017/09/10 00:00:00",
-	show:function(id,d,h,m,s,ms){
+	show:function(id,d,h,m,s,ms,nowtime){
 		id.innerHTML=d+"/"+h;	
 	},
-	over:function(id){
+	over:function(id,d,h,m,s,ms,nowtime){
 		id.innerHTML="已经过期";
 	}
 });
