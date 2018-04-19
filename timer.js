@@ -173,7 +173,7 @@
                     version = b_version.split(";"),
                     trim_Version = version[1] ? version[1].replace(/[ ]/g, "") : null;
 
-                if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE6.0" || browser == "Microsoft Internet Explorer" && trim_Version == "MSIE7.0" || browser == "Microsoft Internet Explorer" && trim_Version == "MSIE8.0" || browser == "Microsoft Internet Explorer" && trim_Version == "MSIE9.0") {
+                if (browser == "Microsoft Internet Explorer") {
                     if (typeof fn === "function") {
                         script.onreadystatechange = function() {
                             var r = script.readyState;
