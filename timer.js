@@ -81,7 +81,7 @@
                     endtime = new Date(sc.endtime).getTime(); //结束时间毫秒
                 self.autoElement = autoElement;
                 if (sc_s.toString()) {
-                    var url_array = ["http://www.zhongye.net/api/apiservice.aspx?method=Web.GetCurrTime&format=json", "http://www.zhongye.net/api/apiservice.aspx?method=Web.GetCurrTimeObj&format=json"],
+                    var url_array = ["//www.zhongye.net/api/apiservice.aspx?method=Web.GetCurrTime&format=json", "//www.zhongye.net/api/apiservice.aspx?method=Web.GetCurrTimeObj&format=json"],
                         get_url = null;
                     switch (sc_s) {
                         case 1:
