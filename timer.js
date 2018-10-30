@@ -27,6 +27,8 @@
  * by 1.9
  * 增强over功能
  *
+ * by 2.0
+ * 本地时间bug修改 
  */
 (function(win) {
     var timer = function() {
@@ -113,7 +115,7 @@
                     } else if (sc_s === 0) {
                         //本地时间
                         var diff = null;
-                        self.util.show_time(endtime, diff, autoElement, sc_s, self.test.bind(self));
+                        self.util.show_time(endtime, diff, autoElement, sc_s, self.test.bind(self),new Date().getTime());
                     }
                 }
             }

@@ -31,12 +31,14 @@ var x1=new Timer({
 var x2=new Timer({
 	id:"bbb",
 	server:0,
-	endtime:"2017/09/10 00:00:00",
+	endtime:"2018/11/05 00:00:00",
 	show:function(id,d,h,m,s,ms,nowtime){
-		id.innerHTML=d+"/"+h;	
+		id.innerHTML=d+"/"+h;
+		console.log(nowtime);
 	},
 	over:function(id,d,h,m,s,ms,nowtime){
 		id.innerHTML="已经过期";
+		console.log(nowtime);
 	}
 });
 
